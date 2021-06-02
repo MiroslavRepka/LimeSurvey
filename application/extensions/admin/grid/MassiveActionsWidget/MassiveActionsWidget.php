@@ -17,6 +17,9 @@
      */
     class massiveActionsWidget extends CWidget
     {
+
+        private const NAME_OF_MODEL_VIEWS = ['yes-no', 'empty', 'yes-no-lg', 'empty-lg', 'cancel-apply'];
+
         // Selector variables
         public $pk;                         // The primary key of the grid
         public $gridid;                     // The id of the related grid
@@ -63,8 +66,15 @@
 
         }
 
+        /**
+         * Check if the view is in the list
+         *
+         * @param $display string this is the name of one of the files in
+         *                        extensions/admin/MassiveActionsWidget/views/modals
+         * @return bool
+         */
         private function isView($display)
         {
-            return in_array($display, array('yes-no', 'empty', 'yes-no-lg', 'empty-lg', 'cancel-add'));
+            return in_array($display, self::NAME_OF_MODEL_VIEWS);
         }
     }
