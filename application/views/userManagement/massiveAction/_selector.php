@@ -18,7 +18,7 @@ $aActionsArray = array(
             'text'          =>  gT('Delete'),
             'grid-reload'   => 'yes',
             'actionType'    => 'modal',
-            'modalType'     => 'cancel-apply',
+            'modalType'     => 'cancel-delete',
             'keepopen'      => 'yes',
             'showSelected'  => 'yes',
             'selectedUrl'   => App()->createUrl('userManagement/renderSelectedItems/'),
@@ -51,7 +51,8 @@ $aActionsArray = array(
             'grid-reload'       => 'yes',
             //modal
             'actionType'        => 'modal',
-            'modalType'         => 'yes-no-lg',
+            'modalType'         => 'cancel-apply',
+            'largeModalView'    => true,
             'keepopen'          => 'yes',
             'showSelected'      => 'yes',
             'selectedUrl'       => App()->createUrl('userManagement/renderSelectedItems/'),
@@ -94,7 +95,8 @@ if(Permission::model()->hasGlobalPermission('superadmin','read')) {
         'grid-reload'       => 'yes',
         //modal
         'actionType'        => 'modal',
-        'modalType'         => 'yes-no-lg',
+        'modalType'         => 'cancel-apply',
+        'largeModalView'    => true,
         'keepopen'          => 'yes',
         'showSelected'      => 'yes',
         'selectedUrl'       => App()->createUrl('userManagement/renderSelectedItems/'),

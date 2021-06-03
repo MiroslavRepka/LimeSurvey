@@ -18,7 +18,15 @@
     class massiveActionsWidget extends CWidget
     {
 
-        private const NAME_OF_MODEL_VIEWS = ['yes-no', 'empty', 'yes-no-lg', 'empty-lg', 'cancel-apply'];
+        /** @var string[] these are the names of the views in MassiveActionsWidget/../modals/ */
+        private const NAME_OF_MODEL_VIEWS = [
+            'yes-no',
+            'empty',
+            'yes-no-lg',
+            'empty-lg',
+            'cancel-apply',
+            'cancel-delete'
+        ];
 
         // Selector variables
         public $pk;                         // The primary key of the grid

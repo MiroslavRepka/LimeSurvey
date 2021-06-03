@@ -54,7 +54,7 @@
                     // modal
                     'actionType'   => 'modal',
                     'modalType'    => 'yes-no',
-                    'showSelected' => 'yes',   
+                    'showSelected' => 'yes',
                     'selectedUrl'  => App()->createUrl('/surveyAdministration/renderItemsSelected/'),
                     'keepopen'     => 'yes',
                     'sModalTitle'  => gT('Set survey theme'),

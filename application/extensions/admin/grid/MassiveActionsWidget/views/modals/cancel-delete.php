@@ -73,7 +73,7 @@ echo $key; ?>"
                 } ?>
             </div>
             <?php
-            Yii::app()->getController()->renderPartial('/layouts/partial_modals/modal_footer_cancelapply');
+            Yii::app()->getController()->renderPartial('/layouts/partial_modals/modal_footer_canceldelete');
             ?>
         </div>
     </div>
