@@ -89,13 +89,9 @@
             </div>
             <?php } ?>
         </div>
-        
-        <div class="row ls-space margin top-15">
-            <hr />
-        </div>
-        <div class="row ls-space margin top-5">
-            <button class="btn btn-success col-sm-3 col-xs-5 col-xs-offset-1" id="submitForm"><?=gT('Save')?></button>
-            <button class="btn btn-error col-sm-3 col-xs-5 col-xs-offset-1" id="exitForm"><?=gT('Cancel')?></button>
+        <div class="modal-footer modal-footer-buttons">
+            <button class="btn btn-cancel" id="exitForm"><?=gT('Cancel')?></button>
+            <button class="btn btn-success" id="submitForm"><?=gT('Save')?></button>
         </div>
         <?php $this->endWidget(); ?>
     </div>
