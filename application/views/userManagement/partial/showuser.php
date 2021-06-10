@@ -1,6 +1,10 @@
-<div class="modal-header">
-    <?=gT('User').' '.gT('detail')?>
-</div>
+<?php
+Yii::app()->getController()->renderPartial(
+    '/layouts/partial_modals/modal_header',
+    ['modalTitle' => gT('User').' '.gT('detail')]
+);
+?>
+
 <div class="modal-body">
     <div class="container-center list-group">
         <div class="row list-group-item">
@@ -21,7 +25,7 @@
         </div>
         <div class="row ls-space margin top-15 bottom-15">
         </div>
-        <div class="row ls-space margin top-35">
+        <div class="modal-footer modal-footer-buttons">
             <button id="exitForm" class="btn btn-default">
                 <?=gT('Close')?></button>
         </div>

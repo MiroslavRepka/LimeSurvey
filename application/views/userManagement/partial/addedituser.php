@@ -1,7 +1,11 @@
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="modalTitle-addedit"><?=($oUser->isNewRecord ? gT('Add user') : gT('Edit user'))?></h4>
-</div>
+<?php
+$modalTitle = $oUser->isNewRecord ? gT('Add user') : gT('Edit user');
+Yii::app()->getController()->renderPartial(
+    '/layouts/partial_modals/modal_header',
+    ['modalTitle' => $modalTitle]
+);
+?>
+
 <div class="modal-body">
     <div class="container-center">
         <?php $form = $this->beginWidget('TbActiveForm', array(
@@ -89,7 +93,8 @@
             </div>
             <?php } ?>
         </div>
-        <div class="modal-footer modal-footer-buttons">
+
+        <div class="modal-footer modal-footer-buttons ls-space top-15">
             <button class="btn btn-cancel" id="exitForm"><?=gT('Cancel')?></button>
             <button class="btn btn-success" id="submitForm"><?=gT('Save')?></button>
         </div>

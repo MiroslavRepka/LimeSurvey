@@ -1,8 +1,10 @@
-<div class="modal-header">
-    <h3>
-        <?php eT("Permission");?>
-    </h3>
-</div>
+<?php
+Yii::app()->getController()->renderPartial(
+    '/layouts/partial_modals/modal_header',
+    ['modalTitle' => gT('Permission')]
+);
+?>
+
 <div class="modal-body">
     <div class="container-center">        
         <?=TbHtml::form(array("userManagement/saveThemePermissions"), 'post', array('name'=>'UserManagement--modalform', 'id'=>'UserManagement--modalform')); ?>
@@ -41,11 +43,11 @@
                     </div>
                 <?php } ?>
             </div>
-            <div class="row ls-space margin top-25">
-                <button class="btn btn-success col-sm-3 col-xs-5 col-xs-offset-1 selector--submitForm" id="submitForm"><?=gT('Save')?></button>
-                <button class="btn btn-error col-sm-3 col-xs-5 col-xs-offset-1 selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
-            </div></div>
+            <div class="modal-footer modal-footer-buttons row ls-space margin top-25">
+                <button class="btn btn-error selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
+                <button class="btn btn-success selector--submitForm" id="submitForm"><?=gT('Save')?></button>
+            </div>
         </form>
     </div>
-</div>
+    </div>
 
