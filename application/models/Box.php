@@ -145,7 +145,7 @@ class Box extends CActiveRecord
         . ' data-button-no="' . gT('No, cancel') . '"'
         . ' data-button-yes="' . gT('Yes, delete') . '"'
         . ' href="' . $url . '"'
-        . ' title="' . gT("Delete box") . '"'
+        . ' title="' . gT("Delete the box") . '"'
         . ' role="button" data-post=\'' . json_encode(['id' => $this->id]) . '\''
         . ' data-text="' . gT('Are you sure you want to delete this box ?') . '"'
         . '><span class="text-danger fa fa-trash" ></span></a>';
