@@ -2,17 +2,18 @@
 /* @var $this PermissiontemplatesController */
 /* @var $model Permissiontemplates */
 /* @var $form CActiveForm */
+
+
+if ($model->isNewRecord) {
+    $modalTitle =  gT('Create permission role');
+} else {
+    $modalTitle = sprintf(gT('Update permission role %s'), $model->name);
+}
+Yii::app()->getController()->renderPartial(
+    '/layouts/partial_modals/modal_header',
+    ['modalTitle' => $modalTitle]
+);
 ?>
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="modalTitle-addedit">
-        <?php if($model->isNewRecord) {
-            echo gT('Create permission role');
-        } else {
-            echo sprintf(gT('Update permission role %s'), $model->name);
-        }?>
-    </h4>
-</div>
 <div class="modal-body">
     <div class="container-center">
         <div class="form">
@@ -46,12 +47,10 @@
                 }
             ?>
 
-            <div class="row ls-space margin top-15">
-                <hr />
-            </div>
-            <div class="row ls-space margin top-5">
-                <button type="submit" class="btn btn-success col-sm-3 col-xs-5 col-xs-offset-1" id="submitForm"><?=gT('Save')?></button>
-                <button class="btn btn-error col-sm-3 col-xs-5 col-xs-offset-1" id="exitForm"><?=gT('Cancel')?></button>
+
+            <div class="modal-footer modal-footer-buttons" style="margin-top: 15px; ">
+                <button class="btn btn-error " id="exitForm"><?=gT('Cancel')?></button>
+                <button type="submit" class="btn btn-success " id="submitForm"><?=gT('Save')?></button>
             </div>
         <?php $this->endWidget(); ?>
         </div><!-- form -->

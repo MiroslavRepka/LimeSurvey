@@ -1,8 +1,9 @@
-<div class="modal-header">
-    <h3>
-        <?php eT("Edit permissions");?>
-    </h3>
-</div>
+<?php
+Yii::app()->getController()->renderPartial(
+    '/layouts/partial_modals/modal_header',
+    ['modalTitle' => gT('Edit permissions')]
+);
+?>
 <div class="modal-body selector--edit-permissions-container">
     <div class="container-center">        
         <?=TbHtml::formTb(
@@ -71,9 +72,9 @@
                     <?php endforeach; ?>
 
                 </table>
-            <div class="row ls-space margin top-25">
-                <button class="btn btn-success col-sm-3 col-xs-5 col-xs-offset-1 selector--submitForm" id="submitForm"><?=gT('Save')?></button>
-                <button class="btn btn-error col-sm-3 col-xs-5 col-xs-offset-1 selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
+            <div class="modal-footer modal-footer-buttons" style="margin-top: 15px;">
+                <button class="btn btn-cancel selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
+                <button class="btn btn-success selector--submitForm" id="submitForm"><?=gT('Save')?></button>
             </div>
         </form>
     </div>
