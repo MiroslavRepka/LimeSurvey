@@ -34,7 +34,7 @@ echo $key; ?>"
 >
     <div class="modal-dialog <?php echo $largeModalView?>">
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" style="color:#000">
             <?php
             Yii::app()->getController()->renderPartial(
                 '/layouts/partial_modals/modal_header',
