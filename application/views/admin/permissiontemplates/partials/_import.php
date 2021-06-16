@@ -5,14 +5,15 @@ Yii::app()->getController()->renderPartial(
 );
 ?>
 
+<?= TbHtml::formTb(
+    null,
+    App()->createUrl('admin/roles/sa/importXML'),
+    'post',
+    ["id" => "RoleControl--modalform-import", 'enctype' => 'multipart/form-data']
+) ?>
+
 <div class="modal-body">
     <div class="container-center">
-        <?= TbHtml::formTb(
-            null,
-            App()->createUrl('admin/roles/sa/importXML'),
-            'post',
-            ["id" => "RoleControl--modalform-import", 'enctype' => 'multipart/form-data']
-        ) ?>
         <div class="row ls-space margin top-5 bottom-5 hidden" id="RoleControl--errors">
         </div>
         <div class="row ls-space margin top-5 bottom-5 hidden" id="RoleControl--errors">
@@ -24,10 +25,11 @@ Yii::app()->getController()->renderPartial(
         <div class="row ls-space margin top-5">
             <hr class="ls-space margin top-5 bottom-10"/>
         </div>
-        <div class="modal-footer modal-footer-buttons" style="margin-top: 15px; ">
-            <button class="btn btn-cancel" id="exitForm"><?=gT('Cancel')?></button>
-            <button class="btn btn-success" id="submitForm"><?=gT('Save')?></button>
-        </div>
-    </form>
     </div>
 </div>
+
+<div class="modal-footer modal-footer-buttons" style="margin-top: 15px; ">
+    <button class="btn btn-cancel" id="exitForm"><?=gT('Cancel')?></button>
+    <button class="btn btn-success" id="submitForm"><?=gT('Save')?></button>
+</div>
+</form>

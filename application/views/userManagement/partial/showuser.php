@@ -25,9 +25,11 @@ Yii::app()->getController()->renderPartial(
         </div>
         <div class="row ls-space margin top-15 bottom-15">
         </div>
-        <div class="modal-footer modal-footer-buttons">
-            <button id="exitForm" class="btn btn-default">
-                <?=gT('Close')?></button>
-        </div>
+
     </div>
+</div>
+
+<div class="modal-footer modal-footer-buttons">
+    <button id="exitForm" class="btn btn-default">
+        <?=gT('Close')?></button>
 </div>

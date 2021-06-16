@@ -14,15 +14,15 @@ Yii::app()->getController()->renderPartial(
     ['modalTitle' => $modalTitle]
 );
 ?>
+
+<?php $form=$this->beginWidget('TbActiveForm', array(
+    'id'=>'RoleControl--modalform',
+    'action' => App()->createUrl('admin/roles/sa/applyEdit'),
+    'enableAjaxValidation'=>false,
+)); ?>
 <div class="modal-body">
     <div class="container-center">
-        <div class="form">
 
-        <?php $form=$this->beginWidget('TbActiveForm', array(
-            'id'=>'RoleControl--modalform',
-            'action' => App()->createUrl('admin/roles/sa/applyEdit'),
-            'enableAjaxValidation'=>false,
-        )); ?>
             <div class="row ls-space margin top-5 bottom-5 hidden" id="RoleControl--errors">
             </div>
             <?php echo $form->hiddenField($model,'ptid'); ?>
@@ -41,18 +41,15 @@ Yii::app()->getController()->renderPartial(
 
             <?php echo $form->hiddenField($model,'renewed_last', ['value' => date('Y-m-d H:i:s')]); ?>
             
-            <?php if($model->isNewRecord ) {
-                    echo $form->hiddenField($model,'created_at', ['value' =>  date('Y-m-d H:i:s')]); 
-                    echo $form->hiddenField($model,'created_by', ['value' =>Yii::app()->user->id]); 
+            <?php if ($model->isNewRecord ) {
+                    echo $form->hiddenField($model,'created_at', ['value' =>  date('Y-m-d H:i:s')]);
+                    echo $form->hiddenField($model,'created_by', ['value' =>Yii::app()->user->id]);
                 }
             ?>
-
-
-            <div class="modal-footer modal-footer-buttons" style="margin-top: 15px; ">
-                <button class="btn btn-error " id="exitForm"><?=gT('Cancel')?></button>
-                <button type="submit" class="btn btn-success " id="submitForm"><?=gT('Save')?></button>
-            </div>
-        <?php $this->endWidget(); ?>
-        </div><!-- form -->
     </div>
 </div>
+<div class="modal-footer modal-footer-buttons" style="margin-top: 15px; ">
+    <button class="btn btn-error " id="exitForm"><?=gT('Cancel')?></button>
+    <button type="submit" class="btn btn-success " id="submitForm"><?=gT('Save')?></button>
+</div>
+<?php $this->endWidget(); ?>

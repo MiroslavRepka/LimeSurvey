@@ -5,9 +5,9 @@ Yii::app()->getController()->renderPartial(
     ['modalTitle' => gT('Adding anonymous users')]
 );
 ?>
+<?=TbHtml::formTb(null, App()->createUrl('userManagement/runAddDummyUser'), 'post', ["id"=>"UserManagement--modalform"])?>
 
 <div class="modal-body">
-    <?=TbHtml::formTb(null, App()->createUrl('userManagement/runAddDummyUser'), 'post', ["id"=>"UserManagement--modalform"])?>
         <div class="container-center">
             <div class="row ls-space margin top-5">
                 <label for="AnonUser_times"><?=gT('How many users should be created')?></label>
@@ -27,9 +27,10 @@ Yii::app()->getController()->renderPartial(
             </div>
 
         </div>
-    <div class="modal-footer modal-footer-buttons">
-        <button id="exitForm" class="btn btn-cancel  "><?=gT('Cancel')?></button>
-        <button class="btn btn-success" id="submitForm"><?=gT('Create')?></button>
-    </div>
-    </form>
 </div>
+
+<div class="modal-footer modal-footer-buttons">
+    <button id="exitForm" class="btn btn-cancel  "><?=gT('Cancel')?></button>
+    <button class="btn btn-success" id="submitForm"><?=gT('Create')?></button>
+</div>
+</form>

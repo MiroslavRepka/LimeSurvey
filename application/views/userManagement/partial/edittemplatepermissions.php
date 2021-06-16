@@ -5,9 +5,13 @@ Yii::app()->getController()->renderPartial(
 );
 ?>
 
+<?=TbHtml::form(
+        array("userManagement/saveThemePermissions"),
+        'post',
+        array('name'=>'UserManagement--modalform', 'id'=>'UserManagement--modalform')
+); ?>
 <div class="modal-body">
-    <div class="container-center">        
-        <?=TbHtml::form(array("userManagement/saveThemePermissions"), 'post', array('name'=>'UserManagement--modalform', 'id'=>'UserManagement--modalform')); ?>
+    <div class="container-center">
             <input type="hidden" name="userid" value="<?php echo $oUser->uid;?>" />
             <div class="list-group-item row list-group-item-info">
                 <div class="col-xs-6 text-left">
@@ -43,11 +47,12 @@ Yii::app()->getController()->renderPartial(
                     </div>
                 <?php } ?>
             </div>
-            <div class="modal-footer modal-footer-buttons row ls-space margin top-25">
-                <button class="btn btn-error selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
-                <button class="btn btn-success selector--submitForm" id="submitForm"><?=gT('Save')?></button>
-            </div>
-        </form>
+
     </div>
-    </div>
+</div>
+<div class="modal-footer modal-footer-buttons row ls-space margin top-25">
+    <button class="btn btn-error selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
+    <button class="btn btn-success selector--submitForm" id="submitForm"><?=gT('Save')?></button>
+</div>
+</form>
 

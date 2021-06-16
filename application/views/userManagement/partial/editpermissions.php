@@ -4,9 +4,10 @@ Yii::app()->getController()->renderPartial(
     ['modalTitle' => gT("Edit permissions")]
 );
 ?>
+
+<?=TbHtml::formTb(null, App()->createUrl('userManagement/saveUserPermissions'), 'post', ["id"=>"UserManagement--modalform"])?>
 <div class="modal-body selector--edit-permissions-container">
-    <div class="container-center">        
-        <?=TbHtml::formTb(null, App()->createUrl('userManagement/saveUserPermissions'), 'post', ["id"=>"UserManagement--modalform"])?>
+    <div class="container-center">
             <input type='hidden' name='userid' value='<?php echo (isset($oUser) ? $oUser->uid : '');?>' />
             <table id='UserManagement--userpermissions-table' class='activecell table table-striped'>
                 <thead>
@@ -74,10 +75,11 @@ Yii::app()->getController()->renderPartial(
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="modal-footer modal-footer-buttons">
-                <button class="btn btn-cancel  selector--exitForm" id="permission-modal-exitForm"><?=gT('Cancel')?></button>
-                <button class="btn btn-success selector--submitForm" id="permission-modal-submitForm"><?=gT('Save')?></button>
-            </div>
-        </form>
     </div>
 </div>
+
+<div class="modal-footer modal-footer-buttons">
+    <button class="btn btn-cancel  selector--exitForm" id="permission-modal-exitForm"><?=gT('Cancel')?></button>
+    <button class="btn btn-success selector--submitForm" id="permission-modal-submitForm"><?=gT('Save')?></button>
+</div>
+</form>

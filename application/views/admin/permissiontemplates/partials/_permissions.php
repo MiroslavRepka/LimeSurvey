@@ -4,14 +4,16 @@ Yii::app()->getController()->renderPartial(
     ['modalTitle' => gT('Edit permissions')]
 );
 ?>
+
+<?=TbHtml::formTb(
+    null,
+    App()->createUrl('admin/roles/sa/savepermissions', ['ptid' => $oModel->ptid]),
+    'post',
+    ["id"=>"RoleControl--modalform"]
+)?>
+
 <div class="modal-body selector--edit-permissions-container">
-    <div class="container-center">        
-        <?=TbHtml::formTb(
-            null, 
-            App()->createUrl('admin/roles/sa/savepermissions', ['ptid' => $oModel->ptid]), 
-            'post', 
-            ["id"=>"RoleControl--modalform"]
-        )?>
+    <div class="container-center">
             <input type='hidden' name='ptid' value='<?php echo (isset($oModel) ? $oModel->ptid : '');?>' />
             <table id='RoleControl--permissions-table' class='activecell table table-striped'>
                 <thead>
@@ -72,10 +74,10 @@ Yii::app()->getController()->renderPartial(
                     <?php endforeach; ?>
 
                 </table>
-            <div class="modal-footer modal-footer-buttons" style="margin-top: 15px;">
-                <button class="btn btn-cancel selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
-                <button class="btn btn-success selector--submitForm" id="submitForm"><?=gT('Save')?></button>
-            </div>
-        </form>
     </div>
 </div>
+<div class="modal-footer modal-footer-buttons" style="margin-top: 15px;">
+    <button class="btn btn-cancel selector--exitForm" id="exitForm"><?=gT('Cancel')?></button>
+    <button class="btn btn-success selector--submitForm" id="submitForm"><?=gT('Save')?></button>
+</div>
+</form>
