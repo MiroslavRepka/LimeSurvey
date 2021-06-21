@@ -19,15 +19,19 @@ jobs:
         env:
           MYSQL_HOST: 127.0.0.1
           MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_PASSWORD:
+          MYSQL_PASSWORD: root
         ports:
           - "3306:3306"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     # Env vars for this job
     env:
       DBENGINE: INNODB
     name: PHP ${{ matrix.php-versions }} # Check each version of php specified in matrix
     steps:
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot -e "SHOW DATABASES"
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Install version of php specified in matrix
