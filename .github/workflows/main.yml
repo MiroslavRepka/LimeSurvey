@@ -13,32 +13,17 @@ jobs:
     strategy:
       matrix:
         php-versions: ['7.2', '8.0']
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - "3306:3306"
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     # Env vars for this job
     env:
       DBENGINE: INNODB
     name: PHP ${{ matrix.php-versions }} # Check each version of php specified in matrix
     steps:
-      - name: Verify MySQL connection from host
-        run: |
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot -e "SHOW DATABASES"
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      # Install version of php specified in matrix
-      - name: Install PHP
-        uses: shivammathur/setup-php@master
-        with:
-          php-version: ${{ matrix.php-versions  }}
-      - name: Report PHP version
-        run: php -v
+      # Start the MySQL service - https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md#mysql 
+      - name: Start the MySQL service
+        run: |
+          sudo systemctl start mysql.service
 
       - name: Initilize and check all dependencies
         run: |
@@ -54,7 +39,6 @@ jobs:
           # Install LimeSurvey.
           php -m  # Spit out all loaded PHP modules
           mysql --version
-          docker ps
           sudo service mysql status
           touch enabletests
           # NB: PHPUnit 6.5.* is installed with composer.
@@ -70,15 +54,15 @@ jobs:
           # InnoDb needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
           sudo service mysql status
-          mysql -uroot -e "Show  variables like '%large%';"
-          mysql -uroot -e "SELECT SUPPORT FROM INFORMATION_SCHEMA.ENGINES WHERE ENGINE = 'InnoDB';"
-          mysql -uroot -e "SET @@global.innodb_large_prefix = 1;"
-          mysql -uroot -e "SET @@global.innodb_file_format =  Barracuda;"
-          mysql -uroot -e "SET @@global.innodb_file_format_max =  Barracuda;"
+          mysql -uroot -proot -e "Show  variables like '%large%';"
+          mysql -uroot -proot -e "Show  variables like '%innodb%';"
+          mysql -uroot -proot -e "SET @@global.innodb_large_prefix = 1;"
+          mysql -uroot -proot -e "SET @@global.innodb_file_format =  Barracuda;"
+          mysql -uroot -proot -e "SET @@global.innodb_file_format_max =  Barracuda;"
 
-          mysql -uroot -e "Show  variables like '%large%';"
-          mysql -uroot -e "Show  variables like '%innodb_file%';"
-          mysql -uroot -e "Show  variables like '%innodb_default%';"
+          mysql -uroot -proot -e "Show  variables like '%large%';"
+          mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
+          mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
 
           php application/commands/console.php install admin password TravisLS no@email.com verbose
           cp application/config/config-sample-mysql.php application/config/config.php
