@@ -107,10 +107,9 @@ jobs:
           java -jar selenium-server-standalone-3.7.1.jar -enablePassThrough false > /dev/null 2> /dev/null &
 
           # Prepare the packages that need to be tested
-          sudo apt-get update
           which nvm
-          nvm install 10.16.3
-          nvm use 10.16.3
+          #nvm install 10.16.3
+          #nvm use 10.16.3
           node ./buildVueComponents.js -s adminbasics -p
       - name: Run the test script
         run: |
