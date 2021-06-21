@@ -36,10 +36,10 @@ jobs:
           git clone git://github.com/phpenv/phpenv.git ~/.phpenv
           echo 'export PATH="$HOME/.phpenv/bin:$PATH"' >> ~/.bash_profile
           echo 'eval "$(phpenv init -)"' >> ~/.bash_profile
-          exec $SHELL -l
+          # Cannot restart the shell, therefore the phpenv need to use absolute path
           
           # disable xdebug to speed up tests
-          phpenv config-rm xdebug.ini
+          $HOME/.phpenv/bin/phpenv config-rm xdebug.ini 
       
           # Install LimeSurvey.
           php -m  # Spit out all loaded PHP modules
@@ -85,13 +85,13 @@ jobs:
           sudo cp /usr/bin/firefox /usr/local/bin/firefox-bin
           which firefox
           firefox -v
-          sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-          if [[ ${TRAVIS_PHP_VERSION:0:3} != "5.6" ]]; then sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf; fi
+          sudo cp ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.conf
+          if [[ ${TRAVIS_PHP_VERSION:0:3} != "5.6" ]]; then sudo cp ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.d/www.conf; fi
           sudo a2enmod rewrite actions fastcgi alias
-          echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+          echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php.ini
           sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
           sudo chown -R travis:travis /var/lib/apache2/fastcgi
-          ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+          ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/sbin/php-fpm
           sudo cp -f tests/travis/travis-ci-apache /etc/apache2/sites-available/000-default.conf
           sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
