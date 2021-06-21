@@ -31,7 +31,13 @@ jobs:
           #- sudo apt-get upgrade
           echo $archive_url
           php -r 'var_dump(PHP_INT_SIZE);'
-
+          
+          # Set up the phpenv
+          git clone git://github.com/phpenv/phpenv.git ~/.phpenv
+          echo 'export PATH="$HOME/.phpenv/bin:$PATH"' >> ~/.bash_profile
+          echo 'eval "$(phpenv init -)"' >> ~/.bash_profile
+          exec $SHELL -l
+          
           # disable xdebug to speed up tests
           phpenv config-rm xdebug.ini
       
