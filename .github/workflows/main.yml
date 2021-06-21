@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04    # ubuntu runner hosted by Github
     strategy:
       matrix:
-        php-versions: ['7.2', '8.0']
+        php-versions: ['7.2'] #, '8.0']
     # Env vars for this job
     env:
       DBENGINE: INNODB
@@ -107,7 +107,6 @@ jobs:
           java -jar selenium-server-standalone-3.7.1.jar -enablePassThrough false > /dev/null 2> /dev/null &
 
           # Prepare the packages that need to be tested
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
           nvm install 10.16.3
           nvm use 10.16.3
           node ./buildVueComponents.js -s adminbasics -p
