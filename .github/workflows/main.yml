@@ -53,16 +53,16 @@ jobs:
 
           # InnoDb needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
-          sudo service mysql status
-          mysql -uroot -proot -e "Show  variables like '%large%';"
-          mysql -uroot -proot -e "Show  variables like '%innodb%';"
-          mysql -uroot -proot -e "SET @@global.innodb_large_prefix = 1;"
-          mysql -uroot -proot -e "SET @@global.innodb_file_format =  Barracuda;"
-          mysql -uroot -proot -e "SET @@global.innodb_file_format_max =  Barracuda;"
+          #sudo service mysql status
+          #mysql -uroot -proot -e "Show  variables like '%large%';"
+          #mysql -uroot -proot -e "Show  variables like '%innodb%';"
+          #mysql -uroot -proot -e "SET @@global.innodb_large_prefix = 1;"
+          #mysql -uroot -proot -e "SET @@global.innodb_file_format =  Barracuda;"
+          #mysql -uroot -proot -e "SET @@global.innodb_file_format_max =  Barracuda;"
 
-          mysql -uroot -proot -e "Show  variables like '%large%';"
-          mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
-          mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
+          #mysql -uroot -proot -e "Show  variables like '%large%';"
+          #mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
+          #mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
 
           php application/commands/console.php install admin password TravisLS no@email.com verbose
           cp application/config/config-sample-mysql.php application/config/config.php
