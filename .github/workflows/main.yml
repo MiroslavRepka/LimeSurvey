@@ -10,9 +10,13 @@ on:
 jobs:
   CI-pipeline:
     runs-on: ubuntu-20.04    # ubuntu runner hosted by Github
+    strategy:
+      matrix:
+        php-versions: ['7.2', '8.0']
     # Env vars for this job
     env:
       DBENGINE: INNODB
+    name: PHPc ${{ matrix.php-versions }} # Check each version of php specified in matrix
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -31,15 +35,6 @@ jobs:
           #- sudo apt-get upgrade
           echo $archive_url
           php -r 'var_dump(PHP_INT_SIZE);'
-          
-          # Set up the phpenv
-          git clone git://github.com/phpenv/phpenv.git ~/.phpenv
-          echo 'export PATH="$HOME/.phpenv/bin:$PATH"' >> ~/.bash_profile
-          echo 'eval "$(phpenv init -)"' >> ~/.bash_profile
-          # Cannot restart the shell, therefore the phpenv need to use absolute path
-          
-          # disable xdebug to speed up tests
-          $HOME/.phpenv/bin/phpenv config-rm xdebug.ini 
       
           # Install LimeSurvey.
           php -m  # Spit out all loaded PHP modules
@@ -85,15 +80,7 @@ jobs:
           sudo cp /usr/bin/firefox /usr/local/bin/firefox-bin
           which firefox
           firefox -v
-          sudo cp ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.conf
-          if [[ ${TRAVIS_PHP_VERSION:0:3} != "5.6" ]]; then sudo cp ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php-fpm.d/www.conf; fi
-          sudo a2enmod rewrite actions fastcgi alias
-          echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/etc/php.ini
-          sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
-          sudo chown -R travis:travis /var/lib/apache2/fastcgi
-          ~/.phpenv/versions/$($HOME/.phpenv/bin/phpenv version-name)/sbin/php-fpm
-          sudo cp -f tests/travis/travis-ci-apache /etc/apache2/sites-available/000-default.conf
-          sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
+
           sudo service apache2 restart
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
