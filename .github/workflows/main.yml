@@ -54,6 +54,7 @@ jobs:
           # Install LimeSurvey.
           php -m  # Spit out all loaded PHP modules
           mysql --version
+          docker ps
           sudo service mysql status
           touch enabletests
           # NB: PHPUnit 6.5.* is installed with composer.
