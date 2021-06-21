@@ -77,7 +77,9 @@ jobs:
           # Install Apache.
           # Code fetched from https://docs.travis-ci.com/user/languages/php/#Apache-%2B-PHP
           sudo apt-get update > /dev/null
-          sudo apt-get -y --force-yes install apache2 libapache2-mod-fastcgi nodejs firefox
+          wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+          sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+          sudo apt-get -y --force-yes install apache2 nodejs firefox
           sudo cp /usr/bin/firefox /usr/local/bin/firefox
           sudo cp /usr/bin/firefox /usr/local/bin/firefox-bin
           which firefox
