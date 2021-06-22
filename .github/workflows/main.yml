@@ -47,12 +47,11 @@ jobs:
           composer install -vvv
           ./third_party/bin/phpunit --version
 
-          chmod -R 777 tmp
-          chown -R $USER tmp
-          chmod -R 777 upload
-          chmod -R 777 themes  # Need 777 so both console and web server can cd into the folder.
-          chmod -R 777 tests/tmp
-          chmod +x tests/bin/lint-*
+          chmod -R 777 ./tmp
+          chmod -R 777 ./upload
+          chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
+          chmod -R 777 ./tests/tmp
+          chmod +x ./tests/bin/lint-*
 
           # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
