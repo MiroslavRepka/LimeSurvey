@@ -48,11 +48,11 @@ jobs:
           ./third_party/bin/phpunit --version
 
           sudo chown -R $USER $HOME/.composer
-          chmod -R 0644 ./tmp
-          chmod -R 0644 ./upload
-          chmod -R 0644 ./themes  # Need 777 so both console and web server can cd into the folder.
-          chmod -R 0644 ./tests/tmp
-          chmod +x ./tests/bin/lint-*
+          sudo chmod -R 0644 ./tmp
+          sudo chmod -R 0644 ./upload
+          sudo chmod -R 0644 ./themes  # Need 777 so both console and web server can cd into the folder.
+          sudo chmod -R 0644 ./tests/tmp
+          sudo chmod +x ./tests/bin/lint-*
 
           # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
