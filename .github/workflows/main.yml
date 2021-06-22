@@ -20,6 +20,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      # This will change the php version for every version specified in matrix https://github.com/marketplace/actions/setup-php-action
+      - name: Install specified PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
       # Start the MySQL service - https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#mysql
       - name: Start the MySQL service
         run: |
@@ -48,10 +53,10 @@ jobs:
           chmod -R 777 tests/tmp
           chmod +x tests/bin/lint-*
 
-          # InnoDb needs large_file_prefix & Barracuda file format
+          # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
+          # InnoDB variables ARE already set to desired values in Github runner (ubuntu-18.04)
 
-          # InnoDB variables are already set to desired values in Github runner (ubuntu-18.04)
           sudo service mysql status
           mysql -uroot -proot -e "Show  variables like '%large%';"
           mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
@@ -66,13 +71,7 @@ jobs:
           # - sed -i '61s/.*/        "debug"=>2,/' application/config/config.php
           # - cat application/config/config.php
     
-          # Install Apache. = Apache2 already installed in Github runner
-          #sudo apt-get update > /dev/null
-          #wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-          #sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-          #sudo apt-get -y --force-yes install apache2 nodejs 
-          #sudo cp /usr/bin/firefox /usr/local/bin/firefox
-          #sudo cp /usr/bin/firefox /usr/local/bin/firefox-bin
+          # Apache2, Node.js, firefox are already installed in Github runner
           which firefox
           firefox -v
 
@@ -90,7 +89,7 @@ jobs:
           #- wget https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip
           #- unzip chromedriver_linux64.zip
 
-          # Setup Selenium with Firefox headless mode.
+          # Setup Selenium with Firefox headless mode, Gecko driver already installed
           wget "https://selenium-release.storage.googleapis.com/3.7/selenium-server-standalone-3.7.1.jar"
           export MOZ_HEADLESS=1
           java -jar selenium-server-standalone-3.7.1.jar -enablePassThrough false > /dev/null 2> /dev/null &
