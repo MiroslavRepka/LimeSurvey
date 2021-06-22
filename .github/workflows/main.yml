@@ -76,8 +76,9 @@ jobs:
           firefox -v
 
           # Set pu the Apache2 and PHP
-          sudo apt -y install php libapache2-mod-php
-          
+          sudo apt-get update > /dev/null
+          sudo apt-get -y install php libapache2-mod-php
+
           sudo service apache2 restart
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
