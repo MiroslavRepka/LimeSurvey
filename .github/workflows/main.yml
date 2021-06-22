@@ -54,8 +54,8 @@ jobs:
           # InnoDb needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
           #sudo service mysql status
-          #mysql -uroot -proot -e "Show  variables like '%large%';"
-          #mysql -uroot -proot -e "Show  variables like '%innodb%';"
+          mysql -uroot -proot -e "Show  variables like '%large%';"
+          mysql -uroot -proot -e "Show  variables like '%innodb%';"
           #mysql -uroot -proot -e "SET @@global.innodb_large_prefix = 1;"
           #mysql -uroot -proot -e "SET @@global.innodb_file_format =  Barracuda;"
           #mysql -uroot -proot -e "SET @@global.innodb_file_format_max =  Barracuda;"
@@ -107,8 +107,8 @@ jobs:
 
           echo "Preparing node.js components"
           # Prepare the packages that need to be tested
-          #nvm install 10.16.3
-          #nvm use 10.16.3
+          nvm install 10.16.3
+          nvm use 10.16.3
           node ./buildVueComponents.js -s adminbasics -p
       - name: Run the test script
         run: |
