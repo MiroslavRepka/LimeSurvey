@@ -27,12 +27,12 @@ class CreateSurveyTest extends TestBaseClassWeb
         parent::setupBeforeClass();
         $username = getenv('ADMINUSERNAME');
         if (!$username) {
-            $username = 'admin';
+            $username = 'root';
         }
 
         $password = getenv('PASSWORD');
         if (!$password) {
-            $password = 'password';
+            $password = 'root';
         }
 
         // Permission to everything.
