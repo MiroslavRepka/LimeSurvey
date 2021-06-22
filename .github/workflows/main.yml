@@ -10,6 +10,11 @@ on:
 jobs:
   CI-pipeline:
     runs-on: ubuntu-18.04    # ubuntu runner hosted by Github
+    container: 
+      image: php:7.4-apache
+      ports: 
+        - 80:80
+      options: --network-alias=localhost
     strategy:
       matrix:
         php-versions: ['7.2'] #, '8.0']
@@ -62,8 +67,6 @@ jobs:
           mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
           mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
 
-          cat application/config/config.php
-
           php application/commands/console.php install admin password TravisLS no@email.com verbose
           cp application/config/config-sample-mysql.php application/config/config.php
           # Enable debug=2 in config file. OBS: This assumes debug is on line 61.
@@ -77,13 +80,14 @@ jobs:
           which firefox
           firefox -v
 
-          sudo service apache2 restart
+          # Set pu the Apache2 and PHP          
+          # sudo service apache2 restart
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
           composer test
 
           # Test server.
-          wget http://localhost/index.php
+          wget localhost
           cat index.html
 
           # Chromedriver setup.
