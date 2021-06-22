@@ -1,6 +1,6 @@
 <VirtualHost *:80>
     ServerAdmin admin@example.com
-    DocumentRoot $GITHUB_WORKSPACE
+    DocumentRoot %CI_BUILD_DIR%
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
