@@ -54,7 +54,7 @@ jobs:
           sudo chmod -R 777 ./tests/tmp
           sudo chmod +x ./tests/bin/lint-*
 
-          ps aux | grep apache
+          ps aux 
 
           # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
