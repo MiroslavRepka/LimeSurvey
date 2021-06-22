@@ -26,10 +26,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # This will change the php version for every version specified in matrix https://github.com/marketplace/actions/setup-php-action
-      - name: Install specified PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
+      #- name: Install specified PHP
+      #  uses: shivammathur/setup-php@v2
+      #  with:
+      #    php-version: ${{ matrix.php-versions }}
       # Start the MySQL service - https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#mysql
       - name: Start the MySQL service
         run: |
