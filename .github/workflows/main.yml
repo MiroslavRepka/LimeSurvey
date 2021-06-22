@@ -76,19 +76,26 @@ jobs:
           firefox -v
 
           # Set up the Apache2 and PHP
-
+          git clone git://github.com/phpenv/phpenv.git ~/.phpenv
+          echo 'export PATH="$HOME/.phpenv/bin:$PATH"' >> ~/.bash_profile
+          echo 'eval "$(phpenv init -)"' >> ~/.bash_profile
+          sudo source  ~/.bash_profile
           sudo apt-get update > /dev/null
           sudo apt-get -y install php-fpm
           wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-          sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-          
+
+          sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+          sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
+          sudo a2enmod rewrite actions fastcgi alias
+          echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
           sudo sed -i -e "s,www-data,$USER,g" /etc/apache2/envvars
           sudo chown -R $USER:$USER /var/lib/apache2/fastcgi
-          sudo cp -f ./tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
+          ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+          sudo cp -f tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
-          sudo cat /etc/apache2/sites-available/000-default.conf
 
+          
           # This will run syntax check, CodeSniffer, MessDetector, etc
           composer test
 
