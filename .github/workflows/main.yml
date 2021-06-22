@@ -81,7 +81,7 @@ jobs:
           composer test
 
           # Test server.
-          wget localhost
+          wget http://localhost/index.php
           cat index.html
 
           # Chromedriver setup.
