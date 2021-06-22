@@ -77,7 +77,8 @@ jobs:
 
           # Set pu the Apache2 and PHP
           sudo apt-get update > /dev/null
-          sudo apt-get -y install libapache2-mod-fastcgi
+          wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+          sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
           sudo cp -f ./tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
