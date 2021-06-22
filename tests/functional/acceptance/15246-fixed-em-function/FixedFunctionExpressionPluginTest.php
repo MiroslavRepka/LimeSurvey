@@ -40,7 +40,6 @@ class FixedFunctionExpressionPluginTest extends TestBaseClassWeb
             ]
         );
         try {
-            self::$webDriver->manage()->timeouts()->implicitlyWait = 10;
             self::$webDriver->get($url);
             /* 1st page */
             $submit = self::$webDriver->findElement(WebDriverBy::id('ls-button-submit'));
