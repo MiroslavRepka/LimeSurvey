@@ -110,6 +110,7 @@ class FixedFunctionExpressionPluginTest extends TestBaseClassWeb
                 'Url: ' . $url . PHP_EOL .
                 'Screenshot ' .$filename . PHP_EOL . $e->getMessage()
             );
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
 
