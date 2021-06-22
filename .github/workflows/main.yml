@@ -80,6 +80,9 @@ jobs:
           echo 'export PATH="$HOME/.phpenv/bin:$PATH"' >> ~/.bash_profile
           echo 'eval "$(phpenv init -)"' >> ~/.bash_profile
           source  ~/.bash_profile
+
+          echo "--PHPENV installed--"
+          sleep 5
           sudo apt-get update > /dev/null
           sudo apt-get -y install php-fpm
           wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
