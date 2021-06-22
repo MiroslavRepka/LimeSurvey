@@ -31,15 +31,12 @@ jobs:
           php tests/check_autoloader.php
 
           # Test
-          #- sudo apt-get update
-          #- sudo apt-get upgrade
           echo $archive_url
           php -r 'var_dump(PHP_INT_SIZE);'
       
           # Install LimeSurvey.
           php -m  # Spit out all loaded PHP modules
           mysql --version
-          sudo service mysql status
           touch enabletests
           # NB: PHPUnit 6.5.* is installed with composer.
           composer install -vvv
@@ -53,20 +50,13 @@ jobs:
 
           # InnoDb needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
+
+          # InnoDB variables are already set to desired values in Github runner (ubuntu-18.04)
           sudo service mysql status
+          mysql -uroot -proot -e "Show  variables like '%large%';"
+          mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
+          mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
 
-          # InnoDB variables are already set to desired values
-          #mysql -uroot -proot -e "Show  variables like '%large%';"
-          #mysql -uroot -proot -e "Show  variables like '%innodb%';"
-          #mysql -uroot -proot -e "SET @@global.innodb_large_prefix = 1;"
-          #mysql -uroot -proot -e "SET @@global.innodb_file_format =  Barracuda;"
-          #mysql -uroot -proot -e "SET @@global.innodb_file_format_max =  Barracuda;"
-
-          #mysql -uroot -proot -e "Show  variables like '%large%';"
-          #mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
-          #mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
-
-          netstat --listening
           php application/commands/console.php install admin password TravisLS no@email.com verbose
           cp application/config/config-sample-mysql.php application/config/config.php
           # Enable debug=2 in config file. OBS: This assumes debug is on line 61.
@@ -109,6 +99,7 @@ jobs:
 
           echo "Preparing node.js components"
           # Prepare the packages that need to be tested
+          # Update the nvm
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
           source ~/.nvm/nvm.sh
           nvm install 10.16.3
