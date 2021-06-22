@@ -48,10 +48,10 @@ jobs:
           ./third_party/bin/phpunit --version
 
           sudo chown -R $USER $HOME/.composer
-          sudo chmod -R 0644 ./tmp
-          sudo chmod -R 0644 ./upload
+          sudo chmod -R 777 ./tmp
+          sudo chmod -R 777 ./upload
           sudo chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
-          sudo chmod -R 0644 ./tests/tmp
+          sudo chmod -R 777 ./tests/tmp
           sudo chmod +x ./tests/bin/lint-*
 
           # InnoDB needs large_file_prefix & Barracuda file format
