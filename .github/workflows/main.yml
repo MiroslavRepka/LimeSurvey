@@ -17,11 +17,6 @@ jobs:
     env:
       DBENGINE: INNODB
     name: PHP ${{ matrix.php-versions }} # Check each version of php specified in matrix
-    services:
-      apache:
-        image: php:7.4-apache
-        ports: 
-          - 80:80
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -80,8 +75,10 @@ jobs:
           which firefox
           firefox -v
 
-          # Set pu the Apache2 and PHP          
-          # sudo service apache2 restart
+          # Set pu the Apache2 and PHP
+          sudo apt -y install php libapache2-mod-php
+          
+          sudo service apache2 restart
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
           composer test
