@@ -82,7 +82,8 @@ jobs:
           sudo cp -f ./tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
-
+          sudo cat /etc/apache2/sites-available/000-default.conf
+          
           # This will run syntax check, CodeSniffer, MessDetector, etc
           composer test
 
