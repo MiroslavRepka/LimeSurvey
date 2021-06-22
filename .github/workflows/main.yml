@@ -10,11 +10,6 @@ on:
 jobs:
   CI-pipeline:
     runs-on: ubuntu-18.04    # ubuntu runner hosted by Github
-    container: 
-      image: php:7.4-apache
-      ports: 
-        - 80:80
-      options: --network-alias=localhost
     strategy:
       matrix:
         php-versions: ['7.2'] #, '8.0']
@@ -22,14 +17,19 @@ jobs:
     env:
       DBENGINE: INNODB
     name: PHP ${{ matrix.php-versions }} # Check each version of php specified in matrix
+    services:
+      apache:
+        image: php:7.4-apache
+        ports: 
+          - 80:80
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # This will change the php version for every version specified in matrix https://github.com/marketplace/actions/setup-php-action
-      #- name: Install specified PHP
-      #  uses: shivammathur/setup-php@v2
-      #  with:
-      #    php-version: ${{ matrix.php-versions }}
+      - name: Install specified PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
       # Start the MySQL service - https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#mysql
       - name: Start the MySQL service
         run: |
