@@ -44,7 +44,7 @@ class FixedFunctionExpressionPluginTest extends TestBaseClassWeb
             /* 1st page */
             $submit = self::$webDriver->findElement(WebDriverBy::id('ls-button-submit'));
             $submit->click();
-            sleep(1); // Needed ?
+            sleep(3); // Needed ?
             /** Simple fixed value check **/
             $textToCompare = self::$webDriver->findElement(WebDriverBy::id('statCountQ00'))->getText();
             $this->assertEquals($textToCompare, "3", 'statCount(self.sgqa) usage broken : «' . $textToCompare ."» vs «3»");
@@ -80,7 +80,7 @@ class FixedFunctionExpressionPluginTest extends TestBaseClassWeb
             /* 2nd page */
             $submit = self::$webDriver->findElement(WebDriverBy::id('ls-button-submit'));
             $submit->click();
-            sleep(1); // Needed ?
+            sleep(3); // Needed ?
             /** Relevance on subquestion **/
             $sgqa = self::$surveyId."X".$questions['Q03']->gid."X".$questions['Q03']->qid;
             // Line to be relevant
