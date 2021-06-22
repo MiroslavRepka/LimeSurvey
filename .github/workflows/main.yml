@@ -48,6 +48,7 @@ jobs:
           ./third_party/bin/phpunit --version
 
           chmod -R 777 tmp
+          chown -R $USER tmp
           chmod -R 777 upload
           chmod -R 777 themes  # Need 777 so both console and web server can cd into the folder.
           chmod -R 777 tests/tmp
