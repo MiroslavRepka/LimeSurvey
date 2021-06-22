@@ -2,7 +2,7 @@ name: CI pipeline for LimeSurvey
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ master ]  # All push and PR
   pull_request:
     branches: [ master ]
   workflow_dispatch:
@@ -61,6 +61,8 @@ jobs:
           mysql -uroot -proot -e "Show  variables like '%large%';"
           mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
           mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
+
+          cat application/config/config.php
 
           php application/commands/console.php install admin password TravisLS no@email.com verbose
           cp application/config/config-sample-mysql.php application/config/config.php

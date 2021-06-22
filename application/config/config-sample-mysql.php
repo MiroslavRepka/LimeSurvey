@@ -26,7 +26,7 @@
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;port=33060;dbname=limesurvey;',
+            'connectionString' => 'mysql:host=localhost;port=3306;dbname=limesurvey;',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => 'root',
