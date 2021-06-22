@@ -66,11 +66,11 @@ jobs:
           # - sed -i '61s/.*/        "debug"=>2,/' application/config/config.php
           # - cat application/config/config.php
     
-          # Install Apache.
-          sudo apt-get update > /dev/null
-          wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-          sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-          sudo apt-get -y --force-yes install apache2 nodejs #firefox
+          # Install Apache. = Apache2 already installed in Github runner
+          #sudo apt-get update > /dev/null
+          #wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+          #sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+          #sudo apt-get -y --force-yes install apache2 nodejs 
           #sudo cp /usr/bin/firefox /usr/local/bin/firefox
           #sudo cp /usr/bin/firefox /usr/local/bin/firefox-bin
           which firefox
@@ -92,8 +92,6 @@ jobs:
 
           # Setup Selenium with Firefox headless mode.
           wget "https://selenium-release.storage.googleapis.com/3.7/selenium-server-standalone-3.7.1.jar"
-          #wget "https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz"
-          #tar xvzf geckodriver-v0.27.0-linux64.tar.gz
           export MOZ_HEADLESS=1
           java -jar selenium-server-standalone-3.7.1.jar -enablePassThrough false > /dev/null 2> /dev/null &
 
