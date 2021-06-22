@@ -9,7 +9,7 @@ on:
 
 jobs:
   CI-pipeline:
-    runs-on: ubuntu-20.04    # ubuntu runner hosted by Github
+    runs-on: ubuntu-18.04    # ubuntu runner hosted by Github
     strategy:
       matrix:
         php-versions: ['7.2'] #, '8.0']
