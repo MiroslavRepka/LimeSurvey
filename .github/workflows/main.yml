@@ -50,22 +50,18 @@ jobs:
           # The test were not able to write into tmp directory, even with chmod 777
 
           # For future files/folders
-          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
-          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
-          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
-          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
-          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
           chmod -R 777 ./tmp
-          sudo chown -R www-data:www-data ./tmp
-          sudo chown -R runner:runner ./tmp
           chmod -R 777 ./upload
           chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
           chmod -R 777 ./tests/tmp
           chmod -R 777 ./application/config
           chmod +x ./tests/bin/lint-*
-
-          
  
           # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
@@ -92,6 +88,9 @@ jobs:
           # Set up the Apache2 and PHP
           sudo apt-get update > /dev/null
           sudo apt install php libapache2-mod-php -y
+
+          wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+          sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
 
           sudo cp -f ./tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
