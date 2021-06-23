@@ -47,7 +47,19 @@ jobs:
           composer install -vvv
           ./third_party/bin/phpunit --version
 
-          # The test were not able to write into tmp directory, even with chmod 777
+          # Apache2, Node.js, firefox are already installed in Github runner
+          which firefox
+          firefox -v
+
+          # Set up the Apache2 and PHP
+          sudo apt-get update > /dev/null
+          sudo apt install php libapache2-mod-php -y         
+
+          sudo cp -f ./tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
+          sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
+          sudo service apache2 restart
+
+          sudo usermod -a -G docker www-data
 
           # For future files/folders
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
@@ -57,6 +69,7 @@ jobs:
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
           chmod -R 777 ./tmp
+          chown -R www-data:docker ./tmp
           chmod -R 777 ./upload
           chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
           chmod -R 777 ./tests/tmp
@@ -80,20 +93,6 @@ jobs:
           # NB: There can be a difference in assets used when debug = 0 or 2 (minified version or not)
           # - sed -i '61s/.*/        "debug"=>2,/' application/config/config.php
           # - cat application/config/config.php
-    
-          # Apache2, Node.js, firefox are already installed in Github runner
-          which firefox
-          firefox -v
-
-          # Set up the Apache2 and PHP
-          sudo apt-get update > /dev/null
-          sudo apt install php libapache2-mod-php -y         
-
-          sudo cp -f ./tests/travis/github-actions-apache /etc/apache2/sites-available/000-default.conf
-          sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
-          sudo service apache2 restart
-
-          sudo usermod -a -G docker www-data
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
           composer test
