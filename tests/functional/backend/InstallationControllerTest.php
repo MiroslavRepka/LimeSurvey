@@ -96,9 +96,15 @@ class InstallationControllerTest extends TestBaseClassWeb
             // Installer start page.
             self::$webDriver->get($url);
 
+            $source = self::$webDriver->getPagesource();
+            echo $source;
+
             // Click "Start installation".
             $start = self::$webDriver->findElement(WebDriverBy::id('ls-start-installation'));
             $start->click();
+
+            $source = self::$webDriver->getPagesource();
+            echo $source;
 
             // Accept license.
             $accept = self::$webDriver->findElement(WebDriverBy::id('ls-accept-license'));
