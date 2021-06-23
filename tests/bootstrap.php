@@ -206,17 +206,17 @@ if (!file_exists(APPPATH . 'config/config' . EXT)) {
 //$config['components']['db']['connectionString'] = 'mysql:host=localhost;port=3306;dbname=ls4;';
 
 // Check that tmp and upload are set to 777 permission (OK on test system).
-if (!strpos(substr(sprintf('%o', fileperms(BASEPATH . '../tmp/')), -4),'777')) {
+if (strpos(substr(sprintf('%o', fileperms(BASEPATH . '../tmp/')), -4),'777') === false) {
     echo substr(sprintf('%o', fileperms(BASEPATH . '../tmp/')), -4);
     die('tmp folder not set to 777');
 }
-if (substr(sprintf('%o', fileperms(BASEPATH . '../tmp/runtime/')), -4) != '0777') {
+if (strpos(substr(sprintf('%o', fileperms(BASEPATH . '../tmp/runtime/')), -4), '777') === false) {
     die('tmp/runtime folder not set to 777');
 }
-if (substr(sprintf('%o', fileperms(BASEPATH . '../upload/')), -4) != '0777') {
+if (strpos(substr(sprintf('%o', fileperms(BASEPATH . '../upload/')), -4), '777') === false) {
     die('upload folder not set to 777');
 }
-if (substr(sprintf('%o', fileperms(BASEPATH . '../tests/tmp/')), -4) != '0777') {
+if (strpos(substr(sprintf('%o', fileperms(BASEPATH . '../tests/tmp/')), -4), '777') === false) {
     die('tests/tmp folder not set to 777');
 }
 
