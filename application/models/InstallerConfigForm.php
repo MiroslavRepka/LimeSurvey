@@ -356,6 +356,7 @@ class InstallerConfigForm extends CFormModel
     {
         $sFolder = opendir($sDirectory);
         if ($sFolder === false) {
+            echo '----------------Directory does not exist-----------------';
             return false; // Dir does not exist
         }
         while ($sFile = readdir($sFolder)) {
@@ -365,7 +366,7 @@ class InstallerConfigForm extends CFormModel
                     (is_dir($sDirectory . DIRECTORY_SEPARATOR . $sFile) && !self::isWritableRecursive($sDirectory . DIRECTORY_SEPARATOR . $sFile)))
             ) {
                 closedir($sFolder);
-                echo $sFile . ' ' . is_writable($sDirectory . DIRECTORY_SEPARATOR . $sFile);
+                echo '---------------- ' . $sFile . ' ' . is_writable($sDirectory . DIRECTORY_SEPARATOR . $sFile) . '----------------';
                 return false;
             }
         }
