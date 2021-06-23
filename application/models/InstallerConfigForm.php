@@ -365,6 +365,7 @@ class InstallerConfigForm extends CFormModel
                     (is_dir($sDirectory . DIRECTORY_SEPARATOR . $sFile) && !self::isWritableRecursive($sDirectory . DIRECTORY_SEPARATOR . $sFile)))
             ) {
                 closedir($sFolder);
+                echo $sFile . ' ' . is_writable($sDirectory . DIRECTORY_SEPARATOR . $sFile);
                 return false;
             }
         }
