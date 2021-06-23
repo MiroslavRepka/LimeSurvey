@@ -47,7 +47,7 @@ jobs:
           composer install -vvv
           ./third_party/bin/phpunit --version
 
-          sudo chown -R www-data ./tmp
+          sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp
           sudo chmod -R 777 ./tmp
           sudo chmod -R 777 ./upload
           sudo chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
