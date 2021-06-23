@@ -88,7 +88,6 @@ class InstallationControllerTest extends TestBaseClassWeb
         $urlMan = \Yii::app()->urlManager;
         $urlMan->setBaseUrl('http://' . self::$domain . '/index.php');
         $url = $urlMan->createUrl('');
-        echo 'Using URL = ' . $url;
         \Yii::import('application.helpers.common_helper', true);
         $installerForm = new \InstallerConfigForm();
         $installerForm->dbtype = \InstallerConfigForm::DB_TYPE_MYSQL;
@@ -104,7 +103,7 @@ class InstallationControllerTest extends TestBaseClassWeb
             // Accept license.
             $accept = self::$webDriver->findElement(WebDriverBy::id('ls-accept-license'));
             $accept->click();
-
+            echo 'Licence accepted';
             // Click next at pre-check.
             $next = self::$webDriver->findElement(WebDriverBy::id('ls-next'));
             $next->click();
@@ -124,6 +123,7 @@ class InstallationControllerTest extends TestBaseClassWeb
 
 
             // Click next.
+            echo 'Database stuff filled for user';
             $next = self::$webDriver->findElement(WebDriverBy::id('ls-next'));
             $next->click();
 
