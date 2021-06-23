@@ -207,6 +207,7 @@ if (!file_exists(APPPATH . 'config/config' . EXT)) {
 
 // Check that tmp and upload are set to 777 permission (OK on test system).
 if (substr(sprintf('%o', fileperms(BASEPATH . '../tmp/')), -4) != '0777') {
+    echo substr(sprintf('%o', fileperms(BASEPATH . '../tmp/')), -4);
     die('tmp folder not set to 777');
 }
 if (substr(sprintf('%o', fileperms(BASEPATH . '../tmp/runtime/')), -4) != '0777') {
