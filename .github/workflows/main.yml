@@ -125,7 +125,7 @@ jobs:
           node ./buildVueComponents.js -s adminbasics -p
       - name: Run the test script
         run: |
-          DOMAIN=localhost ./third_party/bin/phpunit --testdox --stop-on-failure tests/functional/backend/InstallationControllerTest.php
+          DOMAIN=localhost ./third_party/bin/phpunit --testdox --stop-on-failure 
           yarn --cwd ./assets/packages/adminbasics run test
 
   
