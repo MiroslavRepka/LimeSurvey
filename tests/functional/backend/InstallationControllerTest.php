@@ -61,8 +61,8 @@ class InstallationControllerTest extends TestBaseClassWeb
         }
         $dbpwd = getenv('DBPASSWORD');
         if (!$dbpwd) {
-            $dbpwd = 'root';
-            echo 'Default to empty database password. Use DBPASSWORD=... from command-line to override this.' . PHP_EOL;
+            $dbpwd = 'root'; // See https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#mysql
+            echo 'Default to database password "root". Use DBPASSWORD=... from command-line to override this.' . PHP_EOL;
         }
 
         if (file_exists($configFile)) {
@@ -88,6 +88,7 @@ class InstallationControllerTest extends TestBaseClassWeb
         $urlMan = \Yii::app()->urlManager;
         $urlMan->setBaseUrl('http://' . self::$domain . '/index.php');
         $url = $urlMan->createUrl('');
+        echo 'Using URL = ' . $url;
         \Yii::import('application.helpers.common_helper', true);
         $installerForm = new \InstallerConfigForm();
         $installerForm->dbtype = \InstallerConfigForm::DB_TYPE_MYSQL;
