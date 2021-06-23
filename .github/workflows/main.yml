@@ -55,9 +55,17 @@ jobs:
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+
+
+          setfacl -dR -m u:runner:rwX -m u:$(whoami):rwx ./tmp 
+          setfacl -dR -m u:runner:rwX -m u:$(whoami):rwx ./upload 
+          setfacl -dR -m u:runner:rwX -m u:$(whoami):rwx ./themes
+          setfacl -dR -m u:runner:rwX -m u:$(whoami):rwx ./tests/tmp
+          setfacl -dR -m u:runner:rwX -m u:$(whoami):rwx ./application/config
           
           chmod -R 777 ./tmp
           sudo chown -R www-data:www-data ./tmp
+          sudo chown -R runner:runner ./tmp
           chmod -R 777 ./upload
           chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
           chmod -R 777 ./tests/tmp
