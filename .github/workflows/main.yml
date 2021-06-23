@@ -56,7 +56,14 @@ jobs:
           #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
           #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
-          sudo chmod -d -R g+s ./tmp
+          sudo chmod -R 777 ./tmp
+          sudo chmod -R 777 ./upload
+          sudo chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
+          sudo chmod -R 777 ./tests/tmp
+          sudo chmod -R 777 ./application/config
+          sudo chmod +x ./tests/bin/lint-*
+
+          sudo chmod -R g+s ./tmp
           setfacl -d -R -m g::rwx ./tmp
           setfacl -d -R -m o::rwx ./tmp
           sudo chmod -R g+s ./upload 
@@ -73,16 +80,7 @@ jobs:
           setfacl -d -R -m o::rwx ./application/config
 
           ls -la
-
-
-          sudo chmod -R 777 ./tmp
-          sudo chmod -R 777 ./upload
-          sudo chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
-          sudo chmod -R 777 ./tests/tmp
-          sudo chmod -R 777 ./application/config
-          sudo chmod +x ./tests/bin/lint-*
  
-
           # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
           # InnoDB variables ARE already set to desired values in Github runner (ubuntu-18.04)
