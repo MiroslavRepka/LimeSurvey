@@ -50,34 +50,18 @@ jobs:
           # The test were not able to write into tmp directory, even with chmod 777
 
           # For future files/folders
-          #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
-          #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
-          #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
-          #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
-          #sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
-          sudo chmod -R 777 ./tmp
-          sudo chmod -R 777 ./upload
-          sudo chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
-          sudo chmod -R 777 ./tests/tmp
-          sudo chmod -R 777 ./application/config
-          sudo chmod +x ./tests/bin/lint-*
-
-          sudo chmod -R g+s ./tmp
-          setfacl -d -R -m g::rwx ./tmp
-          setfacl -d -R -m o::rwx ./tmp
-          sudo chmod -R g+s ./upload 
-          setfacl -d -R -m g::rwx ./upload 
-          setfacl -d -R -m o::rwx ./upload 
-          sudo chmod -R g+s ./themes
-          setfacl -d -R -m g::rwx ./themes
-          setfacl -d -R -m o::rwx ./themes
-          sudo chmod -R g+s ./tests/tmp
-          setfacl -d -R -m g::rwx ./tests/tmp
-          setfacl -d -R -m o::rwx ./tests/tmp
-          sudo chmod -R g+s ./application/config
-          setfacl -d -R -m g::rwx ./application/config
-          setfacl -d -R -m o::rwx ./application/config
+          chmod -R 777 ./tmp
+          chmod -R 777 ./upload
+          chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
+          chmod -R 777 ./tests/tmp
+          chmod -R 777 ./application/config
+          chmod +x ./tests/bin/lint-*
 
           ls -la
  
