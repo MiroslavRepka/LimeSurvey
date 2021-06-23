@@ -98,7 +98,6 @@ jobs:
           sudo service apache2 restart
 
           sudo usermod -a -G docker www-data
-          getent passwd {1000..60000}
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
           composer test
