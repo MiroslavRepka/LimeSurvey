@@ -48,11 +48,19 @@ jobs:
           ./third_party/bin/phpunit --version
 
           # The test were not able to write into tmp directory, even with chmod 777
+
+          # For future files/folders
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+          # For already existing ones
+          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
+          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
+          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./themes
+          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
+          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
 
 
           sudo chmod -R 777 ./tmp
