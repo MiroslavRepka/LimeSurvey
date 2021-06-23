@@ -103,8 +103,11 @@ class InstallationControllerTest extends TestBaseClassWeb
             // Accept license.
             $accept = self::$webDriver->findElement(WebDriverBy::id('ls-accept-license'));
             $accept->click();
+
             echo 'Licence accepted';
-            sleep(3);
+            $source = self::$webDriver->getPagesource();
+            echo $source;
+
             // Click next at pre-check.
             $next = self::$webDriver->findElement(WebDriverBy::id('ls-next'));
             $next->click();
