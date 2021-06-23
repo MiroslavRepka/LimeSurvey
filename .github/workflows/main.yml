@@ -50,11 +50,11 @@ jobs:
           # The test were not able to write into tmp directory, even with chmod 777
 
           # For future files/folders
-          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
-          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
-          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
-          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
-          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
+          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
+          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
+          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
+          #setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
           chmod -R 777 ./tmp
           sudo chown -R www-data:www-data ./tmp
