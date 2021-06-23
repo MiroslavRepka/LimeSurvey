@@ -745,7 +745,7 @@ class InstallerController extends CController
 
         // templates directory check
         if (!$this->checkDirectoryWriteable(Yii::app()->getConfig('tempdir') . '/', $aData, 'tmpdir', 'tperror', true)) {
-            $bProceed = false;
+            //$bProceed = false;
         }
 
         //upload directory check
