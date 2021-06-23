@@ -56,11 +56,7 @@ jobs:
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
           sudo setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           # For already existing ones
-          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
-          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
-          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./themes
-          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
-          sudo setfacl -R -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+          sudo chown 0:0 ./tmp
 
 
           sudo chmod -R 777 ./tmp
