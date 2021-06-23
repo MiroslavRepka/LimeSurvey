@@ -61,7 +61,7 @@ class InstallationControllerTest extends TestBaseClassWeb
         }
         $dbpwd = getenv('DBPASSWORD');
         if (!$dbpwd) {
-            $dbpwd = '';
+            $dbpwd = 'root';
             echo 'Default to empty database password. Use DBPASSWORD=... from command-line to override this.' . PHP_EOL;
         }
 
