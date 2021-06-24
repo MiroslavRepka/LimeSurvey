@@ -59,7 +59,7 @@ jobs:
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
 
-          sudo usermod -a -G docker www-data
+          sudo usermod -a -G docker www-data # Runner is already in  docker -> gives more permisions
 
           # For future files/folders
           setfacl -dR -m g:docker:rwx -m u:$(whoami):rwx ./tmp 

@@ -602,6 +602,7 @@ class InstallerController extends CController
     {
         $sFolder = opendir($sDirectory);
         if ($sFolder === false) {
+            echo '\n\n\n ------ Directory does not exist ----- \n\n\n';
             return false; // Dir does not exist
         }
         while ($sFile = readdir($sFolder)) {
@@ -611,6 +612,7 @@ class InstallerController extends CController
                 (is_dir($sDirectory . "/" . $sFile) && !$this->isWritableRecursive($sDirectory . "/" . $sFile)))
             ) {
                 closedir($sFolder);
+                echo '\n\n\n ------ Folder not writeable ' . $sFolder . ' ----- \n\n\n';
                 return false;
             }
         }
