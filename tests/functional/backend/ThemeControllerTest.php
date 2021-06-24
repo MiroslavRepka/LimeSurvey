@@ -277,7 +277,7 @@ class ThemeControllerTest extends TestBaseClassWeb
             $this->assertTrue(file_exists($file));
             $fileInput->sendKeys($file)->submit();
 
-            $w->wait(10, 5000);
+            echo substr(sprintf('%o', fileperms('./upload')), -4);
 
             //echo $w->getPageSource();
 
