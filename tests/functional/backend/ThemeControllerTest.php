@@ -263,6 +263,7 @@ class ThemeControllerTest extends TestBaseClassWeb
             $w->get($url);
             
             exec("sudo chmod 777 ./upload");    //Change permissions for tests
+            exec("setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload ");
 
             // Wait for possible modal to appear.
             sleep(1);
