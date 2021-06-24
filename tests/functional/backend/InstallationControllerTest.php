@@ -106,7 +106,7 @@ class InstallationControllerTest extends TestBaseClassWeb
 
             echo 'Licence accepted';
             $source = self::$webDriver->getPagesource();
-            echo $source;
+            //echo $source;
 
             // Click next at pre-check.
             $next = self::$webDriver->findElement(WebDriverBy::id('ls-next'));
