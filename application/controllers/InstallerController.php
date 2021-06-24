@@ -671,7 +671,9 @@ class InstallerController extends CController
             }
         }
         $bResult || $aData[$keyError] = true;
-
+        if (!$bResult) {
+            echo '\n\n\n Path ' . $path . ' is not writeable\n\n\n';
+        }
         return $bResult;
     }
 
