@@ -62,11 +62,11 @@ jobs:
           sudo usermod -a -G docker www-data # Runner is already in  docker -> gives more permisions
 
           # For future files/folders
-          setfacl -dR -m g:docker:rwx -m u:$(whoami):rwx ./tmp 
-          setfacl -dR -m g:docker:rwx -m u:$(whoami):rwx ./upload 
-          setfacl -dR -m g:docker:rwx -m u:$(whoami):rwx ./themes
-          setfacl -dR -m g:docker:rwx -m u:$(whoami):rwx ./tests/tmp
-          setfacl -dR -m g:docker:rwx -m u:$(whoami):rwx ./application/config
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
+          setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
           chmod -R 777 ./tmp
           sudo chown -R www-data:docker ./tmp
