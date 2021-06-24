@@ -85,7 +85,7 @@ class InstallationControllerTest extends TestBaseClassWeb
         }
 
         // Run installer.
-        exec("chmod -R 777 ./tmp");  // Add chmod 777 for CI pipeline
+        exec("sudo chmod -R 777 ./tmp");  // Add chmod 777 for CI pipeline
 
         $urlMan = \Yii::app()->urlManager;
         $urlMan->setBaseUrl('http://' . self::$domain . '/index.php');
