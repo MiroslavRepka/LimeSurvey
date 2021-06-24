@@ -280,7 +280,11 @@ class ThemeControllerTest extends TestBaseClassWeb
             // Check that file is last in list.
             $files = $w->findElements(WebDriverBy::className('other-files-filename'));
             $text = $files[count($files) - 1]->getText();
-            echo 'Files' . $files . '\n';
+
+            for ($x = 0; $x < count($files); $x++) {
+                echo $files[$x]->getText() . '\n';
+            } 
+            
             $this->assertEquals($text, 'dalahorse.jpg', 'Did not find dalahorse, but ' . $text);
 
             // Delete file.
