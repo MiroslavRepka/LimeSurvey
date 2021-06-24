@@ -241,6 +241,8 @@ class ThemeControllerTest extends TestBaseClassWeb
         $_POST['newname'] = 'vanilla_version_1';
         // NB: Must run as web user to get correct permissions here.
         $contr->templatecopy();
+
+        exec('chmod -R 777 ./upload');
         //$dummy->lastAction;
         //$flashes = \Yii::app()->session['aFlashMessage'];
 
@@ -262,9 +264,6 @@ class ThemeControllerTest extends TestBaseClassWeb
         try {
             $w->get($url);
             
-            exec("sudo chmod 777 ./upload");    //Change permissions for tests
-            exec("setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload ");
-
             // Wait for possible modal to appear.
             sleep(1);
 
@@ -278,9 +277,10 @@ class ThemeControllerTest extends TestBaseClassWeb
             $this->assertTrue(file_exists($file));
             $fileInput->sendKeys($file)->submit();
 
-            echo substr(sprintf('%o', fileperms('./upload')), -4);
+            echo substr(sprintf('%o', fileperms('./upload')), -4) . PHP_EOL;
 
             //echo $w->getPageSource();
+            sleep(2);
 
             // Check that file is last in list.
             $files = $w->findElements(WebDriverBy::className('other-files-filename'));
