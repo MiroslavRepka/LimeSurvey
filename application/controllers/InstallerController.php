@@ -603,7 +603,7 @@ class InstallerController extends CController
         echo '----- Checking ' . $sDirectory . '-----';
         $sFolder = opendir($sDirectory);
         if ($sFolder === false) {
-            echo '\n\n\n ------ Directory does not exist ----- \n\n\n';
+            echo '\n\n\n----- Directory ' . $sDirectory . ' does not exist -----\n\n\n';
             return false; // Dir does not exist
         }
         while ($sFile = readdir($sFolder)) {

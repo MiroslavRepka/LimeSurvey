@@ -95,7 +95,8 @@ jobs:
           # - cat application/config/config.php
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
-          composer test
+          ### Disabled for test purpouses ###
+          # composer test 
 
           # Test server.
           wget localhost
