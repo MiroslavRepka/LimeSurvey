@@ -95,8 +95,7 @@ jobs:
           # - cat application/config/config.php
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
-          ### Disabled for test purpouses ###
-          # composer test 
+          composer test 
 
           # Test server.
           wget localhost
@@ -122,7 +121,7 @@ jobs:
           node ./buildVueComponents.js -s adminbasics -p
       - name: Run the test script
         run: |
-          DOMAIN=localhost ./third_party/bin/phpunit --testdox # --stop-on-failure 
+          DOMAIN=localhost ./third_party/bin/phpunit --testdox --stop-on-failure 
           yarn --cwd ./assets/packages/adminbasics run test
 
   
