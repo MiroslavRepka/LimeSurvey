@@ -354,6 +354,7 @@ class InstallerConfigForm extends CFormModel
      */
     public static function isWritableRecursive($sDirectory)
     {
+        echo '----- Checking ' . $sDirectory . '-----';
         $sFolder = opendir($sDirectory);
         if ($sFolder === false) {
             echo '\n\n\n----- Directory ' . $sDirectory . ' does not exist -----\n\n\n';
