@@ -242,7 +242,7 @@ class ThemeControllerTest extends TestBaseClassWeb
         // NB: Must run as web user to get correct permissions here.
         $contr->templatecopy();
 
-        exec('chmod -R 777 ./upload');
+        exec('sudo chmod -R 777 ./upload');
         //$dummy->lastAction;
         //$flashes = \Yii::app()->session['aFlashMessage'];
 
