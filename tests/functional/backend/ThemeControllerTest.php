@@ -262,7 +262,7 @@ class ThemeControllerTest extends TestBaseClassWeb
         try {
             $w->get($url);
             
-            exec("sudo chmod 777 ./tests/data/file_upload");    //Change permissions for Test
+            exec("sudo chmod 777 ./tests");    //Change permissions for tests
 
             // Wait for possible modal to appear.
             sleep(1);
@@ -283,7 +283,7 @@ class ThemeControllerTest extends TestBaseClassWeb
             $files = $w->findElements(WebDriverBy::className('other-files-filename'));
             $text = $files[count($files) - 1]->getText();
 
-            var_dump($file);
+            var_dump($files);
 
             $this->assertEquals($text, 'dalahorse.jpg', 'Did not find dalahorse, but ' . $text);
 
