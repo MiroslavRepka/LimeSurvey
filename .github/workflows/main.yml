@@ -1,8 +1,7 @@
 name: LimeSurvey - CI pipeline 
 # Triggers the workflow on push or pull request events but only for the master branch
 on: [push, pull_request] 
-  # Allows you to trigger the CI pipeline manually from actions tab
-  workflow_dispatch:
+  workflow_dispatch: # Allows you to trigger the CI pipeline manually from actions tab
 
 jobs:
   CI-pipeline:
@@ -118,7 +117,7 @@ jobs:
           nvm install 10.16.3
           nvm use 10.16.3
           node ./buildVueComponents.js -s adminbasics -p
-          
+
       - name: Run the test script
         run: |
           DOMAIN=localhost ./third_party/bin/phpunit --testdox --stop-on-failure
