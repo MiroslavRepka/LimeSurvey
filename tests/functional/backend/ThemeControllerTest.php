@@ -262,7 +262,7 @@ class ThemeControllerTest extends TestBaseClassWeb
         try {
             $w->get($url);
             
-            exec("sudo chmod 777 ./upload");    //Change permissions for Test
+            exec("sudo chmod 777 ./tests/data/file_upload");    //Change permissions for Test
 
             // Wait for possible modal to appear.
             sleep(1);
@@ -284,7 +284,7 @@ class ThemeControllerTest extends TestBaseClassWeb
             $text = $files[count($files) - 1]->getText();
 
             var_dump($file);
-            
+
             $this->assertEquals($text, 'dalahorse.jpg', 'Did not find dalahorse, but ' . $text);
 
             // Delete file.
