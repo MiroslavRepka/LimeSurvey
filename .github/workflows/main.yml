@@ -16,7 +16,6 @@ jobs:
     # Env vars for this job
     env:
       DBENGINE: INNODB
-      DOMAIN: localhost 
     name: PHP ${{ matrix.php-versions }} # Check each version of php specified in matrix
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -122,7 +121,7 @@ jobs:
           node ./buildVueComponents.js -s adminbasics -p
       - name: Run the test script
         run: |
-          sudo -u www-data ./third_party/bin/phpunit --testdox --stop-on-failure  tests/functional/backend/ThemeControllerTest.php
+          DOMAIN=localhost ./third_party/bin/phpunit --testdox --stop-on-failure  tests/functional/backend/ThemeControllerTest.php
           yarn --cwd ./assets/packages/adminbasics run test
 
   
