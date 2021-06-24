@@ -279,6 +279,8 @@ class ThemeControllerTest extends TestBaseClassWeb
 
             sleep(2);
 
+            echo $w->getPageSource();
+
             // Check that file is last in list.
             $files = $w->findElements(WebDriverBy::className('other-files-filename'));
             $text = $files[count($files) - 1]->getText();
