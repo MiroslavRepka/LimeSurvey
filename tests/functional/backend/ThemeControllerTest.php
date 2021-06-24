@@ -277,9 +277,9 @@ class ThemeControllerTest extends TestBaseClassWeb
             $this->assertTrue(file_exists($file));
             $fileInput->sendKeys($file)->submit();
 
-            sleep(2);
+            $w->wait(10, 5000);
 
-            echo $w->getPageSource();
+            //echo $w->getPageSource();
 
             // Check that file is last in list.
             $files = $w->findElements(WebDriverBy::className('other-files-filename'));
