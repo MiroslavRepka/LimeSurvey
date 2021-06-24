@@ -283,10 +283,8 @@ class ThemeControllerTest extends TestBaseClassWeb
             $files = $w->findElements(WebDriverBy::className('other-files-filename'));
             $text = $files[count($files) - 1]->getText();
 
-            for ($x = 0; $x < count($files); $x++) {
-                echo $files[$x]->getText() . '\n';
-            } 
-
+            var_dump($file);
+            
             $this->assertEquals($text, 'dalahorse.jpg', 'Did not find dalahorse, but ' . $text);
 
             // Delete file.
