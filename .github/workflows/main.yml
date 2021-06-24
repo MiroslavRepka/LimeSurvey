@@ -1,21 +1,20 @@
-name: CI pipeline for LimeSurvey
-on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]  # All push and PR
-  pull_request:
-    branches: [ master ]
+name: LimeSurvey - CI pipeline 
+# Triggers the workflow on push or pull request events but only for the master branch
+on: [push, pull_request] 
+  # Allows you to trigger the CI pipeline manually from actions tab
   workflow_dispatch:
 
 jobs:
   CI-pipeline:
     runs-on: ubuntu-18.04    # ubuntu runner hosted by Github
     strategy:
-      matrix:
-        php-versions: ['7.2'] #, '8.0']
+      matrix: 
+        # Specify what versions of php you want to test
+        php-versions: ['7.2'] #, '8.0'] 
     # Env vars for this job
     env:
       DBENGINE: INNODB
+
     name: PHP ${{ matrix.php-versions }} # Check each version of php specified in matrix
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -25,6 +24,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
+      
       # Start the MySQL service - https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#mysql
       - name: Start the MySQL service
         run: |
@@ -59,9 +59,7 @@ jobs:
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
 
-          sudo usermod -a -G docker www-data # Runner is already in  docker -> gives more permisions
-
-          # For future files/folders
+          # Give permision to access files for Apache
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp 
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload 
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
@@ -95,7 +93,7 @@ jobs:
           # - cat application/config/config.php
 
           # This will run syntax check, CodeSniffer, MessDetector, etc
-          # composer test 
+          composer test 
 
           # Test server.
           wget localhost
@@ -116,9 +114,11 @@ jobs:
           # Update the nvm
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
           source ~/.nvm/nvm.sh
+          # Install and use Node.js version 10.16.3
           nvm install 10.16.3
           nvm use 10.16.3
           node ./buildVueComponents.js -s adminbasics -p
+          
       - name: Run the test script
         run: |
           DOMAIN=localhost ./third_party/bin/phpunit --testdox --stop-on-failure
