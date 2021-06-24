@@ -600,10 +600,8 @@ class InstallerController extends CController
      */
     public function isWritableRecursive($sDirectory)
     {
-        echo '----- Checking ' . $sDirectory . '-----';
         $sFolder = opendir($sDirectory);
         if ($sFolder === false) {
-            echo '\n\n\n----- Directory ' . $sDirectory . ' does not exist -----\n\n\n';
             return false; // Dir does not exist
         }
         while ($sFile = readdir($sFolder)) {
@@ -613,7 +611,6 @@ class InstallerController extends CController
                 (is_dir($sDirectory . "/" . $sFile) && !$this->isWritableRecursive($sDirectory . "/" . $sFile)))
             ) {
                 closedir($sFolder);
-                echo '\n\n\n ------ Folder not writable ' . $sFolder . ' ----- \n\n\n';
                 return false;
             }
         }
@@ -671,9 +668,7 @@ class InstallerController extends CController
             }
         }
         $bResult || $aData[$keyError] = true;
-        if (!$bResult) {
-            echo '\n\n\n Path ' . $path . ' is not writeable\n\n\n';
-        }
+        
         return $bResult;
     }
 

@@ -106,15 +106,9 @@ class InstallationControllerTest extends TestBaseClassWeb
             $accept = self::$webDriver->findElement(WebDriverBy::id('ls-accept-license'));
             $accept->click();
 
-            echo 'Licence accepted';
-            $source = self::$webDriver->getPagesource();
-            //echo $source;
-
             // Click next at pre-check.
             $next = self::$webDriver->findElement(WebDriverBy::id('ls-next'));
             $next->click();
-
-            echo 'Next page loaded';
 
             // Fill in database form.
             $dbuserDbType = self::$webDriver->findElement(WebDriverBy::cssSelector('select[name="InstallerConfigForm[dbtype]"] option[value="'.$installerForm->dbtype.'"]'));
@@ -129,12 +123,9 @@ class InstallationControllerTest extends TestBaseClassWeb
             $dbpwdInput->clear()->sendKeys($dbpwd);
             $dbnameInput->sendKeys($databaseName);
 
-
             // Click next.
-            echo 'Database stuff filled for user';
             $next = self::$webDriver->findElement(WebDriverBy::id('ls-next'));
             $next->click();
-            sleep(3);
 
             // Click "Create database".
             $button = self::$webDriver->findElement(WebDriverBy::cssSelector('input[type="submit"]'));

@@ -59,7 +59,7 @@
     <Folder Include="tests\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".github/workflows/main.yml" />
+    <Content Include=".travis.yml" />
     <Content Include="composer.json" />
     <Content Include="composer.lock" />
     <Content Include="logo.png" />
