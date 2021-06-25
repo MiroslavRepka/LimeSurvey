@@ -119,7 +119,7 @@ jobs:
           java -jar selenium-server-standalone-3.7.1.jar -enablePassThrough false > /dev/null 2> /dev/null &
 
       # Prepare the packages that need to be tested and update the nvm
-      - name: Prepare the nvm with Node ${{ matrix.php-versions }}
+      - name: Prepare the nvm with Node ${{ matrix.nodeJS-versions }}
         run: |
           # Update
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
