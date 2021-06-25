@@ -9,6 +9,7 @@ jobs:
       matrix: 
         # Specify what versions of php you want to test
         php-versions: ['7.2', '8.0'] 
+        node-versions: [ '10.16.3' ] 
     # Env vars for this job
     env:
       DBENGINE: INNODB
@@ -45,11 +46,9 @@ jobs:
           composer install -vvv
           ./third_party/bin/phpunit --version
 
-          # Apache2, Node.js, firefox are already installed in Github runner
-          which firefox
-          firefox -v
-
-          # Set up the Apache2 and PHP
+      - name: Set up Apache+PHP
+        run: |
+          # Set up the Apache and PHP
           sudo apt-get update > /dev/null
           sudo apt install php libapache2-mod-php -y         
 
@@ -71,7 +70,9 @@ jobs:
           chmod -R 777 ./tests/tmp
           chmod -R 777 ./application/config
           chmod +x ./tests/bin/lint-*
- 
+
+      - name: Check MySQL service
+        run: |
           # InnoDB needs large_file_prefix & Barracuda file format
           # https://discuss.gogs.io/t/solved-mysql-error-1064-while-running-first-install/1604
           # InnoDB variables ARE already set to desired values in Github runner (ubuntu-18.04)
@@ -81,40 +82,52 @@ jobs:
           mysql -uroot -proot -e "Show  variables like '%innodb_file%';"
           mysql -uroot -proot -e "Show  variables like '%innodb_default%';"
 
+      - name: Load custom console and start the Application
+        run: |   
           php application/commands/console.php install admin password TravisLS no@email.com verbose
           cp application/config/config-sample-mysql.php application/config/config.php
-          # Enable debug=2 in config file. OBS: This assumes debug is on line 61.
-          # TODO: Disable, a lines was added to config file and some tests started to fail.
-          # NB: EmCache is always disabled when debug => 2
-          # NB: There can be a difference in assets used when debug = 0 or 2 (minified version or not)
-          # - sed -i '61s/.*/        "debug"=>2,/' application/config/config.php
-          # - cat application/config/config.php
+        
+        # Enable debug=2 in config file. OBS: This assumes debug is on line 61.
+        # TODO: Disable, a lines was added to config file and some tests started to fail.
+        # NB: EmCache is always disabled when debug => 2
+        # NB: There can be a difference in assets used when debug = 0 or 2 (minified version or not)
+        # sed -i '61s/.*/        "debug"=>2,/' application/config/config.php
+        # cat application/config/config.php
 
-          # This will run syntax check, CodeSniffer, MessDetector, etc
-          composer test 
+      - name: Run syntax check, CodeSniffer, MessDetector, ...
+        run: composer test 
 
+      - name: Test the server
+        run: |
           # Test server.
           wget localhost
           cat index.html
 
-          # Chromedriver setup.
-          # Note: Keep getting timeout problems on Travis with chromedriver.
-          #- wget https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip
-          #- unzip chromedriver_linux64.zip
+        # Chromedriver setup.
+        # Note: Keep getting timeout problems on Travis with chromedriver.
+        # wget https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip
+        # unzip chromedriver_linux64.zip
+
+      - name: Set up Selenium with firefox
+        run: |
+          which firefox
+          firefox -v
 
           # Setup Selenium with Firefox headless mode, Gecko driver already installed
           wget "https://selenium-release.storage.googleapis.com/3.7/selenium-server-standalone-3.7.1.jar"
           export MOZ_HEADLESS=1
           java -jar selenium-server-standalone-3.7.1.jar -enablePassThrough false > /dev/null 2> /dev/null &
 
-          echo "Preparing node.js components"
-          # Prepare the packages that need to be tested
-          # Update the nvm
+      # Prepare the packages that need to be tested and update the nvm
+      - name: Prepare the nvm with Node ${{ matrix.php-versions }}
+        run: |
+          # Update
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
           source ~/.nvm/nvm.sh
-          # Install and use Node.js version 10.16.3
-          nvm install 10.16.3
-          nvm use 10.16.3
+
+          # Install Node.js
+          nvm install ${{ matrix.php-versions }}
+          nvm use ${{ matrix.php-versions }}
           node ./buildVueComponents.js -s adminbasics -p
 
       - name: Run the test script
