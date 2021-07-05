@@ -432,6 +432,7 @@ class TestHelper extends TestCase
             } catch (WebDriverException $ex) {
                 $tries++;
                 sleep(1);
+                echo $ex; // print the exception
             }
         } while (!$success && $tries < 5);
 
