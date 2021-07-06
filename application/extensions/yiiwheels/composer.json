@@ -18,8 +18,7 @@
         }
     ],
     "require": {
-        "crisu83/yiistrap": "dev-bs3",
-        "doctrine/orm": "^2.5"
+        "crisu83/yiistrap": "dev-bs3"
     },
     "require-dev": {
         "php": ">=5.3.0",

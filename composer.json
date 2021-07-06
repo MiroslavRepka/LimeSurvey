@@ -42,8 +42,7 @@
 	},
 	"require": {
 		"twig/twig": "1.42.5",
-        "yiiext/twig-renderer":"dev-master",
-		"doctrine/orm": "^2.5"
+        "yiiext/twig-renderer":"dev-master"
 	},
     "scripts": {
         "test": [
