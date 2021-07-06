@@ -45,25 +45,25 @@ jobs:
           # Set up the Apache and PHP
           sudo apt-get update > /dev/null
           sudo apt install php libapache2-mod-php -y
-
-          chmod -R 777 ./tmp
-          chmod -R 777 ./upload
-          chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
-          chmod -R 777 ./tests/tmp
-          chmod -R 777 ./application/config
-          chmod +x ./tests/bin/lint-*
           
           sudo cp -f ./tests/CI-pipeline/github-actions-apache /etc/apache2/sites-available/000-default.conf
           sudo sed -e "s?%CI_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
           sudo service apache2 restart
 
           # Give permision to access files for Apache
-          sudo chown -R www-data:docker ./tmp
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tmp
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./upload
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./themes
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
+
+          sudo chown -R www-data:docker ./tmp
+          chmod -R 777 ./tmp
+          chmod -R 777 ./upload
+          chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
+          chmod -R 777 ./tests/tmp
+          chmod -R 777 ./application/config
+          chmod +x ./tests/bin/lint-*
 
       - name: Load custom console and start the Application
         run: |
