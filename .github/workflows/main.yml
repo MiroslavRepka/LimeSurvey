@@ -39,6 +39,8 @@ jobs:
           touch enabletests
           # NB: PHPUnit 6.5.* is installed with composer.
           composer install -vvv
+          # Update on PHP 5.x to get a compatible version
+          composer update 
           ./third_party/bin/phpunit --version
 
       - name: Set up Apache+PHP
