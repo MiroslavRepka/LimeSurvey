@@ -9,10 +9,11 @@ on:
 jobs:
   CI-pipeline:
     runs-on: ubuntu-18.04    # ubuntu runner hosted by Github
+    if: ${{ always() }}
     strategy:
       matrix:
         # Specify what versions of php you want to test
-        php-versions: ['5.6', '7.4']
+        php-versions: ['5.6' , '7.4']
     # Env vars for this job
     env:
       DBENGINE: INNODB
@@ -26,7 +27,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: composer:v1
 
       # Start the MySQL service - https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#mysql
       - name: Start the MySQL service
