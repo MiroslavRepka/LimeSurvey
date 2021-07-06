@@ -2,8 +2,6 @@ name: LimeSurvey - CI pipeline for 3.x LTS
 # Triggers the workflow on push or pull request events on all branches
 on:
   push:
-    branches:
-      - '*'
   pull_request:
     branches:
       - '3.x-LTS'
