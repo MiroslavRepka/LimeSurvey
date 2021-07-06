@@ -63,13 +63,13 @@ jobs:
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./tests/tmp
           setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwx ./application/config
           
-          chmod -R 777 ./tmp
+          sudo chmod -R 777 ./tmp
           sudo chown -R www-data:docker ./tmp
-          chmod -R 777 ./upload
-          chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
-          chmod -R 777 ./tests/tmp
-          chmod -R 777 ./application/config
-          chmod +x ./tests/bin/lint-*
+          sudo chmod -R 777 ./upload
+          sudo chmod -R 777 ./themes  # Need 777 so both console and web server can cd into the folder.
+          sudo chmod -R 777 ./tests/tmp
+          sudo chmod -R 777 ./application/config
+          sudo chmod +x ./tests/bin/lint-*
 
       - name: Check MySQL service
         run: |
