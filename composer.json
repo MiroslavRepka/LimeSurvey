@@ -38,12 +38,12 @@
 	"require-dev": {
 		"facebook/webdriver": "^1.4",
         "squizlabs/php_codesniffer": "2.*",
-        "phpunit/phpunit": "5.7.*",
-		"doctrine/instantiator": "1.0.5"
+        "phpunit/phpunit": "5.7.*"
 	},
 	"require": {
 		"twig/twig": "1.42.5",
-        "yiiext/twig-renderer":"dev-master"
+        "yiiext/twig-renderer":"dev-master",
+		"doctrine/orm": "^2.5"
 	},
     "scripts": {
         "test": [
