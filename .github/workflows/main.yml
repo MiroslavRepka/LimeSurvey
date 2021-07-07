@@ -9,7 +9,6 @@ on:
 jobs:
   CI-pipeline:
     runs-on: ubuntu-18.04    # ubuntu runner hosted by Github
-    if: ${{ always() }}
     strategy:
       matrix:
         # Specify what versions of php you want to test
