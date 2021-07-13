@@ -17,7 +17,6 @@ jobs:
     # Env vars for this job
     env:
       DBENGINE: INNODB
-
     name: PHP ${{ matrix.php-versions }}  # Check each version of php specified in matrix
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
